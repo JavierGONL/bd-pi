@@ -14,6 +14,19 @@ pins_2=[
      Pin (6, Pin.OUT), # IN3
      Pin (7, Pin.OUT)  # IN4
      ]
+pins_3=[
+     Pin (8, Pin.OUT), # IN1
+     Pin (9, Pin.OUT), # IN2
+     Pin (10, Pin.OUT), # IN3
+     Pin (11, Pin.OUT)  # IN4
+     ]
+pins_4=[
+     Pin (16, Pin.OUT), # IN1
+     Pin (17, Pin.OUT), # IN2
+     Pin (20, Pin.OUT), # IN3
+     Pin (21, Pin.OUT)  # IN4
+     ]
+
 
 secuencia = [
     [1,0,0,0],
