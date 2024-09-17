@@ -88,17 +88,27 @@ def paso_motor(secuencia, pins, revoluciones):
         if revolucion_a >= revoluciones:             
             break
 
-def doble_paso_motor(secuencia, pins, pins2, revoluciones):
+def doble_paso_motor(secuencia, pins, pins2, revoluciones,invertir=False):
     revolucion_a = 0
     while True:
-        for paso in secuencia:
-            for i in range(len(pins)):
-                pins[i].value(paso[::-1][i])
-                pins2[i].value(paso[i])
-                time.sleep(0.001)
-                revolucion_a +=1
-        if revolucion_a >= revoluciones:             
-            break
+        if not invertir:
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[::-1][i])
+                    pins2[i].value(paso[i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+        else: 
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[i])
+                    pins2[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
 
 revoluciones = 1250 # 8250 una vuelta
 pasos = 0
@@ -107,4 +117,4 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            doble_paso_motor(secuencia3, pins_1, pins_3,2000)
+            doble_paso_motor(secuencia3, pins_1, pins_3,2000,True)
