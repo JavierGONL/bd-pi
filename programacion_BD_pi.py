@@ -67,6 +67,8 @@ while True:
                     pins_1[i].value(paso[i])
                     pins_3[i].value(paso[::-1][i])
                     time.sleep(0.001)
+                    print(paso)
+                    print(revolucion_a)
                     revolucion_a +=1
             if revolucion_a >= 2000:
                 pos_inicio =  False                
