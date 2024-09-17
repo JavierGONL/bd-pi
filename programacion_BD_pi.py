@@ -119,7 +119,7 @@ def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, in
                     pins1[i].value(paso[::-1][i])
                     pins2[i].value(paso[i])
                     pins3[i].value(paso[i])
-                    pins4[i].value(paso[i])
+                    pins4[i].value(paso[::-1][i])
                     time.sleep(0.001)
                     revolucion_a +=1
             if revolucion_a >= revoluciones:             
@@ -128,7 +128,7 @@ def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, in
             for paso in secuencia:
                 for i in range(len(pins1)):
                     pins1[i].value(paso[i])
-                    pins2[i].value(paso[i])
+                    pins2[i].value(paso[::-1][i])
                     pins3[i].value(paso[::-1][i])
                     pins4[i].value(paso[i])
                     time.sleep(0.001)
@@ -143,4 +143,5 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            cuadruple_paso_motor(secuencia3, pins_1, pins_2, pins_3, pins_4, 2000, True)
+            doble_paso_motor(secuencia, pins_1, pins_3, revoluciones)
+            doble_paso_motor(secuencia, pins_2, pins_4, revoluciones)
