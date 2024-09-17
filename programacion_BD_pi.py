@@ -109,6 +109,30 @@ def doble_paso_motor(secuencia, pins, pins2, revoluciones,invertir=False):
                     revolucion_a +=1
             if revolucion_a >= revoluciones:             
                 break
+    
+def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, invertir=False):
+    revolucion_a = 0
+    while True:
+        if not invertir:
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins1[i].value(paso[::-1][i])
+                    pins2[i].value(paso[i])
+                    pins3[i].value(paso[i])
+                    pins4[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+        else: 
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[i])
+                    pins2[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
 
 revoluciones = 1250 # 8250 una vuelta
 pasos = 0
@@ -117,4 +141,5 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            doble_paso_motor(secuencia3, pins_1, pins_3,2000,True)
+            doble_paso_motor(secuencia2, pins_1, pins_3,2000,True)
+            cuadruple_paso_motor(secuencia3, pins_1, pins_2, pins_3, pins_4, 2000)
