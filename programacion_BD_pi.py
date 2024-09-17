@@ -115,7 +115,7 @@ def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, in
     while True:
         if not invertir:
             for paso in secuencia:
-                for i in range(len(pins)):
+                for i in range(len(pins1)):
                     pins1[i].value(paso[::-1][i])
                     pins2[i].value(paso[i])
                     pins3[i].value(paso[i])
