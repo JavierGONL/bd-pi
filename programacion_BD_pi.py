@@ -64,7 +64,8 @@ while True:
         while True:
             for paso in secuencia3:
                 for i in range(len(pins_2)):
-                    pins_2[i].value(paso[i])
+                    pins_1[i].value(paso[i])
+                    pins_3[i].value(paso[i])
                     time.sleep(0.001)
                     revolucion_a +=1
             if revolucion_a >= 2000:
