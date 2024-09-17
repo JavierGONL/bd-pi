@@ -143,4 +143,4 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            cuadruple_paso_motor(secuencia3, pins_1, pins_2, pins_3, pins_4, 2000)
+            cuadruple_paso_motor(secuencia3, pins_1, pins_2, pins_3, pins_4, 2000, True)
