@@ -1,0 +1,60 @@
+from machine import Pin
+import time
+
+
+pins_1= [
+     Pin (0, Pin.OUT), # IN1
+     Pin (1, Pin.OUT), # IN2
+     Pin (2, Pin.OUT), # IN3
+     Pin (3, Pin.OUT)  # IN4
+     ]
+pins_2=[
+     Pin (4, Pin.OUT), # IN1
+     Pin (5, Pin.OUT), # IN2
+     Pin (6, Pin.OUT), # IN3
+     Pin (7, Pin.OUT)  # IN4
+     ]
+
+secuencia = [
+    [1,0,0,0],
+    [0,1,0,0],
+    [0,0,1,0],
+    [0,0,0,1]
+    ]
+
+secuencia2 = [
+    [1,1,0,0],
+    [0,1,1,0],
+    [0,0,1,1],
+    [1,0,0,1]
+    ]
+
+secuencia3 = [
+    [1,0,0,0],
+    [1,1,0,0],
+    [0,1,0,0],
+    [0,1,1,0],
+    [0,0,1,0],
+    [1,0,1,1],
+    [0,0,0,1],
+    [1,0,0,1]
+    ]
+
+
+revoluciones = 1250 # 8250 una vuelta
+pasos = 0
+inicio = True
+pos_inicio = True
+while True:
+    if pos_inicio:
+        revolucion_a = 0
+        while True:
+            for paso in secuencia3:
+                for i in range(len(pins_2)):
+                    pins_2[i].value(paso[i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= 2000:
+                pos_inicio =  False                
+                break
+            
