@@ -34,12 +34,25 @@ secuencia = [
     [0,0,1,0],
     [0,0,0,1]
     ]
+secuencia_invertida =[
+    [0,0,0,1],
+    [0,0,1,0],
+    [0,1,0,0],
+    [1,0,0,0]
+    ]
 
 secuencia2 = [
     [1,1,0,0],
     [0,1,1,0],
     [0,0,1,1],
     [1,0,0,1]
+    ]
+
+secouencia2_invertida = [
+    [1,0,0,1],
+    [0,0,1,1],
+    [0,1,1,0],
+    [1,1,0,0]
     ]
 
 secuencia3 = [
@@ -53,6 +66,23 @@ secuencia3 = [
     [1,0,0,1]
     ]
 
+secuencia3_invertida = [
+    [1,0,0,1],
+    [0,0,0,1],
+    [0,0,1,1],
+    [0,1,1,1],
+    [0,1,0,0],
+    [1,1,0,0],
+    [1,0,0,0],
+    [1,0,1,0]
+    ]
+
+def paso_motor(secuencia, pins):
+    for paso in secuencia:
+        for i in range(len(pins)):
+            pins[i].value(paso[i])
+            time.sleep(0.001)
+            revolucion +=1
 
 revoluciones = 1250 # 8250 una vuelta
 pasos = 0
@@ -62,15 +92,16 @@ while True:
     if pos_inicio:
         revolucion_a = 0
         while True:
-            for paso in secuencia3:
-                for i in range(len(pins_2)):
-                    pins_1[i].value(paso[i])
-                    pins_3[i].value(paso[::-1][i])
-                    time.sleep(0.001)
-                    print(paso)
-                    print(revolucion_a)
-                    revolucion_a +=1
-            if revolucion_a >= 2000:
-                pos_inicio =  False                
-                break
-            
+            # for paso in secuencia3:
+            #     for i in range(len(pins_2)):
+            #         pins_1[i].value(paso[::-1][i])
+            #         pins_3[i].value(paso[i])
+            #         time.sleep(0.001)
+            #         print(paso)
+            #         print(revolucion_a)
+            #         revolucion_a +=1
+            # if revolucion_a >= 2000:
+            #     pos_inicio =  False                
+            #     break
+            paso_motor(secuencia3, pins_1)
+            paso_motor(secuencia3, pins_3)
