@@ -77,12 +77,18 @@ secuencia3_invertida = [
     [1,0,1,0]
     ]
 
-def paso_motor(secuencia, pins):
-    for paso in secuencia:
-        for i in range(len(pins)):
-            pins[i].value(paso[i])
-            time.sleep(0.001)
-            revolucion +=1
+def paso_motor(secuencia, pins, revoluciones):
+    revolucion_a = 0
+    while True:
+        
+        for paso in secuencia:
+            for i in range(len(pins)):
+                pins[i].value(paso[i])
+                time.sleep(0.001)
+                revolucion_a +=1
+        if revolucion_a >= revoluciones:             
+            break
+   
 
 revoluciones = 1250 # 8250 una vuelta
 pasos = 0
@@ -90,7 +96,6 @@ inicio = True
 pos_inicio = True
 while True:
     if pos_inicio:
-        revolucion_a = 0
         while True:
             # for paso in secuencia3:
             #     for i in range(len(pins_2)):
