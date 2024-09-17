@@ -107,16 +107,4 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            # for paso in secuencia3:
-            #     for i in range(len(pins_2)):
-            #         pins_1[i].value(paso[::-1][i])
-            #         pins_3[i].value(paso[i])
-            #         time.sleep(0.001)
-            #         print(paso)
-            #         print(revolucion_a)
-            #         revolucion_a +=1
-            # if revolucion_a >= 2000:
-            #     pos_inicio =  False                
-            #     break
-            paso_motor(secuencia3_invertida, pins_1,2000)
-            paso_motor(secuencia3, pins_3,2000)
+            doble_paso_motor(secuencia3, pins_1, pins_3,2000)
