@@ -107,5 +107,5 @@ while True:
             # if revolucion_a >= 2000:
             #     pos_inicio =  False                
             #     break
-            paso_motor(secuencia3, pins_1,2000)
+            paso_motor(secuencia3_invertida, pins_1,2000)
             paso_motor(secuencia3, pins_3,2000)
