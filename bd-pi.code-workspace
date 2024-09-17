@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "serial:/COM4",
+			"uri": "serial://com4/"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "serial:/COM4"
+	}
+}
