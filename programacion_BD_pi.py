@@ -136,12 +136,17 @@ def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, in
             if revolucion_a >= revoluciones:             
                 break
 
-revoluciones = 1250 # 8250 una vuelta
+revoluciones = 10 # 8250 una vuelta
 pasos = 0
 inicio = True
 pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            doble_paso_motor(secuencia, pins_1, pins_3, revoluciones)
-            doble_paso_motor(secuencia, pins_2, pins_4, revoluciones)
+            doble_paso_motor(secuencia2, pins_1, pins_3, revoluciones)
+            doble_paso_motor(secuencia2, pins_2, pins_4, revoluciones)
+            pasos+=1
+            if pasos>100:
+                pasos= 0
+                break
+    break
