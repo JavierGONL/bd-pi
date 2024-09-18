@@ -26,7 +26,12 @@ pins_4=[
      Pin (20, Pin.OUT), # IN3
      Pin (21, Pin.OUT)  # IN4
      ]
-
+pins_5=[
+     Pin (12, Pin.OUT), # IN1
+     Pin (13, Pin.OUT), # IN2
+     Pin (14, Pin.OUT), # IN3
+     Pin (15, Pin.OUT)  # IN4
+     ]
 
 secuencia = [
     [1,0,0,0],
@@ -77,16 +82,25 @@ secuencia3_invertida = [
     [1,0,1,0]
     ]
 
-def paso_motor(secuencia, pins, revoluciones):
+def paso_motor(secuencia, pins, revoluciones,invertir =False):
     revolucion_a = 0
     while True:
-        for paso in secuencia:
-            for i in range(len(pins)):
-                pins[i].value(paso[i])
-                time.sleep(0.001)
-                revolucion_a +=1
-        if revolucion_a >= revoluciones:             
-            break
+        if not invertir:
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+        else: 
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
 
 def doble_paso_motor(secuencia, pins, pins2, revoluciones,invertir=False):
     revolucion_a = 0
@@ -143,10 +157,74 @@ pos_inicio = True
 while True:
     if pos_inicio:
         while True:
-            doble_paso_motor(secuencia2, pins_1, pins_3, revoluciones)
-            doble_paso_motor(secuencia2, pins_2, pins_4, revoluciones)
+            paso_motor(secuencia2, pins_1, revoluciones,True)
+            paso_motor(secuencia2, pins_1, revoluciones,True)
             pasos+=1
-            if pasos>100:
-                pasos= 0
+            if pasos >= 50:
+                pasos = 0
                 break
-    break
+        while True:
+            paso_motor(secuencia2, pins_2, revoluciones,True)
+            paso_motor(secuencia2, pins_2, revoluciones,True)
+            pasos+=1
+            if pasos >= 25:
+                pasos=0
+                break
+        while True:
+            paso_motor(secuencia2, pins_1, revoluciones)
+            paso_motor(secuencia2, pins_1, revoluciones)
+            pasos+=1
+            if pasos >= 75:
+                pasos = 0
+                break
+        while True:
+            paso_motor(secuencia2, pins_2, revoluciones)
+            paso_motor(secuencia2, pins_2, revoluciones)
+            pasos+=1
+            if pasos >= 25:
+                pasos=0
+                break
+        while True:
+            paso_motor(secuencia2, pins_1, revoluciones,True)
+            paso_motor(secuencia2, pins_1, revoluciones,True)
+            pasos+=1
+            if pasos >= 25:
+                pasos = 0
+                break
+        # otra pierna
+        while True:
+            paso_motor(secuencia2, pins_3, revoluciones)
+            paso_motor(secuencia2, pins_3, revoluciones)
+            pasos+=1
+            if pasos >= 50:
+                pasos = 0
+                break
+        while True:
+            paso_motor(secuencia2, pins_4, revoluciones)
+            paso_motor(secuencia2, pins_4, revoluciones)
+            pasos+=1
+            if pasos >= 25:
+                pasos=0
+                break
+        while True:
+            paso_motor(secuencia2, pins_3, revoluciones,True)
+            paso_motor(secuencia2, pins_3, revoluciones,True)
+            pasos+=1
+            if pasos >= 75:
+                pasos = 0
+                break
+        while True:
+            paso_motor(secuencia2, pins_4, revoluciones,True)
+            paso_motor(secuencia2, pins_4, revoluciones,True)
+            pasos+=1
+            if pasos >= 25:
+                pasos=0
+                break
+        while True:
+            paso_motor(secuencia2, pins_3, revoluciones)
+            paso_motor(secuencia2, pins_3, revoluciones)
+            pasos+=1
+            if pasos >= 25:
+                pasos = 0
+                break
+
