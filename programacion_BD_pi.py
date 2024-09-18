@@ -1,6 +1,10 @@
-from machine import Pin
+from machine import ADC, Pin
 import time
 
+
+#
+# giroscopio
+# motores
 
 pins_1= [
      Pin (0, Pin.OUT), # IN1
@@ -26,19 +30,26 @@ pins_4=[
      Pin (20, Pin.OUT), # IN3
      Pin (21, Pin.OUT)  # IN4
      ]
+# motor cabeza
+
 pins_5=[
      Pin (12, Pin.OUT), # IN1
      Pin (13, Pin.OUT), # IN2
      Pin (14, Pin.OUT), # IN3
      Pin (15, Pin.OUT)  # IN4
      ]
+# cabeza
+adc_1 = ADC(Pin(27))# resistencia izquierda #crear los 2 pines ADC
+adc_2= ADC(Pin(28)) # resistencia derecha 
+ir_derecha= False
+ir_izquierda= False
 
 secuencia = [
     [1,0,0,0],
     [0,1,0,0],
     [0,0,1,0],
     [0,0,0,1]
-    ]
+    ]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 secuencia_invertida =[
     [0,0,0,1],
     [0,0,1,0],
@@ -82,6 +93,22 @@ secuencia3_invertida = [
     [1,0,1,0]
     ]
 
+def movimiento_cabeza(adc_1,adc_2):
+    intensidades_luz=[adc_1.read_u16(),adc_2.read_u16()]
+    porcentaje_d = intensidades_luz[0]*100/65535
+    porcentaje_i = intensidades_luz[1]*100/(65535-500)
+    bandera_cambio = abs(intensidades_luz[0] - intensidades_luz[1]) * 100 /65535
+
+    if intensidades_luz[0] >intensidades_luz[1] and bandera_cambio > 10:
+        ir_izquierda=False
+        ir_derecha=True
+        return ir_derecha
+    if intensidades_luz[0] < intensidades_luz[1] and bandera_cambio > 10:
+        ir_derecha=False
+        ir_izquierda=True
+        return ir_derecha
+    
+    time.sleep(0.5)
 def paso_motor(secuencia, pins, revoluciones,invertir =False):
     revolucion_a = 0
     while True:
@@ -123,32 +150,6 @@ def doble_paso_motor(secuencia, pins, pins2, revoluciones,invertir=False):
                     revolucion_a +=1
             if revolucion_a >= revoluciones:             
                 break
-    
-def cuadruple_paso_motor(secuencia, pins1, pins2, pins3, pins4, revoluciones, invertir=False):
-    revolucion_a = 0
-    while True:
-        if not invertir:
-            for paso in secuencia:
-                for i in range(len(pins1)):
-                    pins1[i].value(paso[::-1][i])
-                    pins2[i].value(paso[i])
-                    pins3[i].value(paso[i])
-                    pins4[i].value(paso[::-1][i])
-                    time.sleep(0.001)
-                    revolucion_a +=1
-            if revolucion_a >= revoluciones:             
-                break
-        else: 
-            for paso in secuencia:
-                for i in range(len(pins1)):
-                    pins1[i].value(paso[i])
-                    pins2[i].value(paso[::-1][i])
-                    pins3[i].value(paso[::-1][i])
-                    pins4[i].value(paso[i])
-                    time.sleep(0.001)
-                    revolucion_a +=1
-            if revolucion_a >= revoluciones:             
-                break
 
 revoluciones = 10 # 8250 una vuelta
 pasos = 0
@@ -164,8 +165,8 @@ while True:
                 pasos = 0
                 break
         while True:
-            paso_motor(secuencia2, pins_2, revoluciones,True)
-            paso_motor(secuencia2, pins_2, revoluciones,True)
+            paso_motor(secuencia2, pins_2,revoluciones,True)
+            paso_motor(secuencia2, pins_2,revoluciones,True)
             pasos+=1
             if pasos >= 25:
                 pasos=0
@@ -227,4 +228,7 @@ while True:
             if pasos >= 25:
                 pasos = 0
                 break
-
+        while True:
+            revolucion_b = 0
+            movimiento = movimiento_cabeza(adc_1,adc_2)
+            paso_motor(secuencia2, pins_5, revoluciones,movimiento)
