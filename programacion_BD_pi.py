@@ -43,6 +43,8 @@ adc_1 = ADC(Pin(27))# resistencia izquierda #crear los 2 pines ADC
 adc_2= ADC(Pin(28)) # resistencia derecha 
 ir_derecha= False
 ir_izquierda= False
+led_1 = Pin (22, Pin.OUT)
+led_2 = Pin (26, Pin.OUT)
 
 secuencia = [
     [1,0,0,0],
@@ -102,10 +104,14 @@ def movimiento_cabeza(adc_1,adc_2):
     if intensidades_luz[0] >intensidades_luz[1] and bandera_cambio > 10:
         ir_izquierda=False
         ir_derecha=True
+        led_1.value(1)
+        led_2.value(0)
         return ir_derecha
     if intensidades_luz[0] < intensidades_luz[1] and bandera_cambio > 10:
         ir_derecha=False
         ir_izquierda=True
+        led_1.value(0)
+        led_2.value(1)
         return ir_derecha
     
     time.sleep(0.5)
@@ -157,6 +163,7 @@ inicio = True
 pos_inicio = True
 while True:
     if pos_inicio:
+        # movimiento piernas
         while True:
             paso_motor(secuencia2, pins_1, revoluciones,True)
             paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -228,7 +235,11 @@ while True:
             if pasos >= 25:
                 pasos = 0
                 break
-        while True:
+        while True: # movimiento de la cabeza
             revolucion_b = 0
             movimiento = movimiento_cabeza(adc_1,adc_2)
             paso_motor(secuencia2, pins_5, revoluciones,movimiento)
+            pasos +=1
+            if pasos>= 200:
+                break
+            
