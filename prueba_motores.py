@@ -123,7 +123,8 @@ while True:
     paso_motor(secuencia2, pins_1, revoluciones,True)
     paso_motor(secuencia2, pins_1, revoluciones,True)
     pasos+=1
-    if pasos >= 256:# 256 pasos es una vuelta entera
+    if pasos >= 256:
+    # 256 pasos es una vuelta entera bajo este programa, así que cada paso equivale a la activación de 2 fases del motor
         pasos = 0
         break
 
