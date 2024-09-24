@@ -148,6 +148,7 @@ while True:
     # 256 pasos es una vuelta entera bajo este programa, así que cada paso equivale a la activación de 2 fases del motor
         pasos = 0
         break
+    doble_paso_motor(secuencia2,pins_1,pins_2,revoluciones,False)
 
 """
 
