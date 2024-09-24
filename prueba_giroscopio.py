@@ -5,7 +5,7 @@
 import time
 from machine import Pin, I2C
 from micropython_bmi160 import bmi160
-
+from prueba_motores import *
 i2c = I2C(1, sda=Pin(18), scl=Pin(19))  # Correct I2C pins for RP2040
 bmi = bmi160.BMI160(i2c)
 bandera_equilibrio=False
@@ -19,5 +19,7 @@ def giroscopio(bmi,bandera_equilibrio):
         return bandera_equilibrio
 if __name__=="__main__":
     while True: #monitoreo del programa
-        print(giroscopio(bmi,bandera_equilibrio))
+        if giroscopio(bmi,bandera_equilibrio)==True:
+            paso_motor(secuencia2,pins_1,revoluciones,True)
+            
 
