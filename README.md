@@ -27,28 +27,28 @@ poster utilizado en el encuentro ingenia futuro
 <figcaption><b></b></figcaption></figure>
 </div>
 
-# 6
+## 6
 > imagen del resultado final
-# 7 
+## 7 
 > video
 
+## contexto.
+
+### problematica 
+> aqui va la problematica del proyecto
 ### Objetivos
 
 Implementación de recursos y conocimientos aprendidos en clase.
-
-#### Objetivos Especificos
-<ul>
-<li>Implementación de un microcontrolador en este caso la Raspberry Pi Pico W, para el funcionamiento del robot.</li>
-
-<br>
-
-[![Caja-Pico.jpg](https://i.postimg.cc/7Z9nVkL5/Caja-Pico.jpg)](https://postimg.cc/3kyG8zmh)
-
-<br>
-
-<li>Implementar codigo en Microphython para la configuración del microcontrolador</li>
-<li>Creación y diseño de un prototipo atractivo ya que está planteado como un juguete para niños</li> 
-<li>Diseño de aplicación movil que permita el manejo del robot</li>
+  * Objetivos Especificos.
+      * Implementación de un microcontrolador en este caso la Raspberry Pi Pico W, para el funcionamiento del robot.
+      * Implementar codigo en Microphython para la configuración del microcontrolador
+      * Creación y diseño de un prototipo
+      * Diseño de aplicación movil que permita el manejo del robot
+        
+<div align='center'>
+<figure> <img src="https://i.postimg.cc/Y03xhhXK/image.png" alt="" width="500" height="auto"/></br>
+<figcaption><b></b></figcaption></figure>
+</div>
 
 ### Desarrollo
 El BD-π es un robot mixto ya que se encuentra construido con materiales caseros y materiales construidos con impresión 3D, la cual a lo largo del proyecto nos ha presentado tanto fallas como exitos de impresión
