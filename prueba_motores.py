@@ -113,12 +113,33 @@ def paso_motor(secuencia, pins, revoluciones,invertir =False):
                     revolucion_a +=1
             if revolucion_a >= revoluciones:             
                 break
-
+def doble_paso_motor(secuencia, pins, pins2, revoluciones,invertir=False):# esta función mueve 2 motores a la vez
+    revolucion_a = 0
+    while True:
+        if not invertir:
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[i])
+                    pins2[i].value(paso[i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+        else: 
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[::-1][i])
+                    pins2[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
 
 revoluciones = 10 # 8250 una vuelta
 pasos = 0
 inicio = True
 pos_inicio = True
+"""
 while True:
     paso_motor(secuencia2, pins_1, revoluciones,True)
     paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -127,4 +148,6 @@ while True:
     # 256 pasos es una vuelta entera bajo este programa, así que cada paso equivale a la activación de 2 fases del motor
         pasos = 0
         break
+
+"""
 
