@@ -1,6 +1,35 @@
 from machine import ADC, Pin
 import time
 
+
+def paso_motor(secuencia, pins, revoluciones,invertir =False):
+    revolucion_a = 0
+    while True:
+        if not invertir:
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[::-1][i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+        else: 
+            for paso in secuencia:
+                for i in range(len(pins)):
+                    pins[i].value(paso[i])
+                    time.sleep(0.001)
+                    revolucion_a +=1
+            if revolucion_a >= revoluciones:             
+                break
+# motor cabeza
+
+pins_5=[
+     Pin (12, Pin.OUT), # IN1
+     Pin (13, Pin.OUT), # IN2
+     Pin (14, Pin.OUT), # IN3
+     Pin (15, Pin.OUT)  # IN4
+     ]
+
 # cabeza
 adc_1 = ADC(Pin(27))# resistencia izquierda #crear los 2 pines ADC
 adc_2= ADC(Pin(28)) # resistencia derecha 
