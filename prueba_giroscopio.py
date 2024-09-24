@@ -12,14 +12,24 @@ bandera_equilibrio=False
 def giroscopio(bmi,bandera_equilibrio):
     while True:
         gyrox, gyroy, gyroz = bmi.gyro
-        #print(f"x:{gyrox:.2f}°/s, y:{gyroy:.2f}°/s, z{gyroz:.2f}°/s")
+        #print(f"x:{gyrox:.2f}°/s, y:{gyroy:.2f}°/s, z{gyroz:.2f}°/s") #monitoreo
         if abs(gyrox) >=12 or abs(gyroy)>=12:
             bandera_equilibrio=True
         time.sleep(0.5)
         return bandera_equilibrio
 if __name__=="__main__":
-    while True: #monitoreo del programa
-        if giroscopio(bmi,bandera_equilibrio)==True:
-            paso_motor(secuencia2,pins_1,revoluciones,True)
+    while True:
+        bandera= giroscopio(bmi,bandera_equilibrio)
+        #print(bandera) #monitoreo
+        while bandera:
+            pasos=0
+            while pasos <=100:
+                doble_paso_motor(secuencia2,pins_1,pins_2,13.75,False)
+                doble_paso_motor(secuencia2,pins_3,pins_4,13.75,True)
+                pasos+=1
+            pasos=0
+            break
+
             
+
 
