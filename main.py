@@ -484,12 +484,12 @@ while True:
     """
 def SolicitudWeb(conn):
     try:
-        requests = conn.recv(1024)
+        requests = conn.recv(4096)
         print("Solicitud recibida:")
         request=requests.decode("utf-8")
         print(request)
 
-        if b"/caminar" in request:
+        if b"x2f/x63/x61/x6d/x69/x6e/x61/x72/x0a" in request:
             Caminar()
             response = "HTTP/1.1 200 OK\n\nCaminar."
         elif b"/piernaizquierda" in request:
