@@ -3,7 +3,20 @@ from machine import ADC, Pin, I2C
 from micropython_bmi160 import bmi160
 import time
 import socket
+#import sys
+#boot.py
+#primero se ejecuta el boot para conectarlo a wifi
+import network
 
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect('Bidipi', 'michi111')
+
+while not wlan.isconnected() and wlan.status() >= 0:
+    print("Conectando...")
+    if wlan.isconnected():
+        break
+print(wlan.ifconfig())
 # pines motores
 
 pins_1= [
@@ -169,6 +182,9 @@ pasos = 0
 def Caminar():
     global revoluciones
     global pasos
+    print("gatito")
+    print(revoluciones)
+    print(pasos)
     while True:
         while True:
             paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -422,11 +438,12 @@ def simulacion():
                     pasos = 0
                     break
             
-
+"""
 def SolicitudWeb(conn):
-    request = conn.recv(1024)  # Recibe la solicitud HTTP
-    request = str(request)
+    request= conn.recv(1024)  # Recibe la solicitud HTTP
+    request = request.decode('utf-8')
     print("Solicitud recibida:")
+    print(request)
 
     if "/caminar" in request:
         Caminar()
@@ -446,7 +463,7 @@ def SolicitudWeb(conn):
     conn.send(response)
     conn.close()
     
-addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
+addr = socket.getaddrinfo('0.0.0.0', 8080)[0][-1]
 s = socket.socket()
 s.bind(addr)
 s.listen(1)
@@ -454,4 +471,43 @@ s.listen(1)
 while True:
     cl, addr = s.accept()  
     print('Cliente conectado desde', addr)
-    SolicitudWeb(cl) 
+    SolicitudWeb(cl)
+    """
+def SolicitudWeb(conn):
+    try:
+        requests = conn.recv(1024)
+        print("Solicitud recibida:")
+        request=requests.decode("utf-8")
+        print(request)
+
+        if b"/caminar" in request:
+            Caminar()
+            response = "HTTP/1.1 200 OK\n\nCaminar."
+        elif b"/piernaizquierda" in request:
+            PiernaIzquierda()
+            response = "HTTP/1.1 200 OK\n\nPierna izquierda."
+        elif b"/piernaderecha" in request:
+            PiernaDerecha()
+            response = "HTTP/1.1 200 OK\n\nPierna derecha."
+        elif b"/cabeza" in request:
+            Cabeza()
+            response = "HTTP/1.1 200 OK\n\nCabeza."
+        else:
+            response = "HTTP/1.1 404 Not Found\n\n404 Not Found."
+
+        conn.send(response.encode())
+    finally:
+        conn.close()
+
+addr = socket.getaddrinfo('0.0.0.0', 8080)[0][-1]
+s = socket.socket()
+s.bind(addr)
+s.listen(1)
+
+try:
+    while True:
+        cl, addr = s.accept()
+        print('Cliente conectado desde', addr)
+        SolicitudWeb(cl)
+finally:
+    s.close()
