@@ -430,12 +430,21 @@ def SolicitudWeb(conn):
 
     if "/caminar" in request:
         Caminar()
+        response = "HTTP/1.1 200 OK\n\nCaminar."
     elif "/piernaizquierda" in request:
        PiernaIzquierda()
+       response = "HTTP/1.1 200 OK\n\nPierna izquierda."
     elif "/piernaderecha" in request:
         PiernaDerecha()
+        response = "HTTP/1.1 200 OK\n\nPierna derecha."
     elif "/cabeza" in request:
         Cabeza()
+        response = "HTTP/1.1 200 OK\n\nCabeza."
+    else:
+        response = "HTTP/1.1 404 Not Found\n\n404 Not Found."
+
+    conn.send(response)
+    conn.close()
     
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
 s = socket.socket()
