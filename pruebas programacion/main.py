@@ -17,6 +17,15 @@ while not wlan.isconnected() and wlan.status() >= 0:
     if wlan.isconnected():
         break
 print(wlan.ifconfig())
+
+html = """<!DOCTYPE html>
+<html>
+<head> <title> Gatito </title> </head>
+<body>
+</body>
+</html>
+"""
+
 # pines motores
 
 pins_1= [
@@ -475,12 +484,12 @@ while True:
     """
 def SolicitudWeb(conn):
     try:
-        requests = conn.recv(1024)
+        requests = conn.recv(4096)
         print("Solicitud recibida:")
         request=requests.decode("utf-8")
         print(request)
 
-        if b"/caminar" in request:
+        if b"x2f/x63/x61/x6d/x69/x6e/x61/x72/x0a" in request:
             Caminar()
             response = "HTTP/1.1 200 OK\n\nCaminar."
         elif b"/piernaizquierda" in request:
@@ -499,15 +508,18 @@ def SolicitudWeb(conn):
     finally:
         conn.close()
 
-addr = socket.getaddrinfo('0.0.0.0', 8080)[0][-1]
+addr = socket.getaddrinfo('192.168.181.149', 8080)[0][-1]
 s = socket.socket()
 s.bind(addr)
 s.listen(1)
-
-try:
-    while True:
+print(addr)
+while True:
+    try:
         cl, addr = s.accept()
+        print(cl)
         print('Cliente conectado desde', addr)
         SolicitudWeb(cl)
-finally:
-    s.close()
+    except Exception as e:
+        print(f"Error: {e}")
+
+

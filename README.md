@@ -7,69 +7,10 @@
 * Rafael David Martinez Ovallos
 ------------
 
-## introduccion
-
-El BD- π es un prototipo de juguete planteado para permitir a niños y jóvenes introducirse en el ámbito de la robótica, y de su implementación en la vida diaria mediante la construcción de un robot semiautónomo con la integración de materiales y procesos caseros como el balso y el ensamble con pegamento termofusible, junto con el uso de piezas impresas en 3D. Un microcontrolador Raspberry Pi Pico W, una PCB diseñada e impresa nacionalmente; el empleo de circuitos integrados junto con componentes y software de la más alta calidad.
-
-### palabras claves:
-Robótica educativa, Raspberry Pi Pico W, PCB nacional, impresión 3D, circuitos integrados, materiales caseros, construcción DIY, software.
-
 <div align='center'>
-<figure> <img src="https://i.postimg.cc/fynFYNHV/BDPI-armado.jpg" alt="" width="500" height="auto"/></br>
+<figure> <img src="https://i.postimg.cc/LX4L3TPT/image.png" alt="" width="800" height="auto"/></br>
 <figcaption><b></b></figcaption></figure>
 </div>
 
-## poster
-poster utilizado en el encuentro ingenia futuro
 
-<div align='center'>
-<figure> <img src="https://i.postimg.cc/mZzRC7Rg/image.png" alt="" width="500" height="auto"/></br>
-<figcaption><b></b></figcaption></figure>
-</div>
-
-## 6
-> imagen del resultado final
-## 7 
-> video
-
-## contexto.
-
-### problematica 
-> aqui va la problematica del proyecto
-### Objetivos
-
-Implementación de recursos y conocimientos aprendidos en clase.
-  * Objetivos Especificos.
-      * Implementación de un microcontrolador en este caso la Raspberry Pi Pico W, para el funcionamiento del robot.
-      * Implementar codigo en Microphython para la configuración del microcontrolador
-      * Creación y diseño de un prototipo
-      * Diseño de aplicación movil que permita el manejo del robot
-        
-<div align='center'>
-<figure> <img src="https://i.postimg.cc/Y03xhhXK/image.png" alt="" width="500" height="auto"/></br>
-<figcaption><b></b></figcaption></figure>
-</div>
-
-### Desarrollo
-El BD-π es un robot mixto ya que se encuentra construido con materiales caseros y materiales construidos con impresión 3D, la cual a lo largo del proyecto nos ha presentado tanto fallas como exitos de impresión
-
-<ul>
-<li>Primera impresión fallida de la pata</li>
-<br>
-
-[![Impresi-n-de-patas.jpg](https://i.postimg.cc/sxWJ9GBz/Impresi-n-de-patas.jpg)](https://postimg.cc/gLYRGJqt)
-
-<br>
-<li>Segunda impresión fallida de la pata</li>
-<br>
-
-[![Mecanismo-de-Pata.jpg](https://i.postimg.cc/5Ncg9gG2/Mecanismo-de-Pata.jpg)](https://postimg.cc/QVb10Qh2)
-
-<br>
-Despues de los intentos fallidos de impresión de la pata optamos por la idea de la utilizar de patines la cual fue descartada de forma rapida
-
-<br>
-
-[![Idea-Patines.jpg](https://i.postimg.cc/ncCxZHyJ/Idea-Patines.jpg)](https://postimg.cc/ZCt2xhY7)
-
-<br>
+#### 🤖[wiki del proyecto](https://github.com/JavierGONL/bd-pi/wiki)🤖
