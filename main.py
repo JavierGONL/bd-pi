@@ -20,7 +20,7 @@ print(wlan.ifconfig())
 
 html = """<!DOCTYPE html>
 <html>
-<head> <title></title> </head>
+<head> <title> Gatito </title> </head>
 <body>
 </body>
 </html>
@@ -508,14 +508,15 @@ def SolicitudWeb(conn):
     finally:
         conn.close()
 
-addr = socket.getaddrinfo('0.0.0.0', 8080)[0][-1]
+addr = socket.getaddrinfo('192.168.181.149', 8080)[0][-1]
 s = socket.socket()
 s.bind(addr)
 s.listen(1)
-
+print(addr)
 while True:
     try:
         cl, addr = s.accept()
+        print(cl)
         print('Cliente conectado desde', addr)
         SolicitudWeb(cl)
     except Exception as e:
