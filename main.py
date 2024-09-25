@@ -17,6 +17,15 @@ while not wlan.isconnected() and wlan.status() >= 0:
     if wlan.isconnected():
         break
 print(wlan.ifconfig())
+
+html = """<!DOCTYPE html>
+<html>
+<head> <title></title> </head>
+<body>
+</body>
+</html>
+"""
+
 # pines motores
 
 pins_1= [
@@ -504,10 +513,12 @@ s = socket.socket()
 s.bind(addr)
 s.listen(1)
 
-try:
-    while True:
+while True:
+    try:
         cl, addr = s.accept()
         print('Cliente conectado desde', addr)
         SolicitudWeb(cl)
-finally:
-    s.close()
+    except Exception as e:
+        print(f"Error: {e}")
+
+
