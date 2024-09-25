@@ -8,7 +8,7 @@
 ------------
 
 <div align='center'>
-<figure> <img src="https://i.postimg.cc/LX4L3TPT/image.png" alt="" width="800" height="auto"/></br>
+<figure> <img src="https://github.com/JavierGONL/bd-pi/blob/main/imagenes/presentacion%20ingenia.jpg?raw=true" alt="" width="800" height="auto"/></br>
 <figcaption><b></b></figcaption></figure>
 </div>
 
