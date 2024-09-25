@@ -437,10 +437,6 @@ def SolicitudWeb(conn):
     elif "/cabeza" in request:
         Cabeza()
     
-        
-    conn.send(response)
-    conn.close()
-    
 addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
 s = socket.socket()
 s.bind(addr)
@@ -449,4 +445,4 @@ s.listen(1)
 while True:
     cl, addr = s.accept()  
     print('Cliente conectado desde', addr)
-    handle_request(cl) 
+    SolicitudWeb(cl) 
