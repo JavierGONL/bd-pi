@@ -11,3 +11,6 @@
 <figure> <img src="https://i.postimg.cc/LX4L3TPT/image.png" alt="" width="800" height="auto"/></br>
 <figcaption><b></b></figcaption></figure>
 </div>
+
+
+[wiki del proyecto](https://github.com/JavierGONL/bd-pi/wiki).
