@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MH-CD42")(type "KiCad")(uri "${KIPRJMOD}/libs/MH-CD42")(options "")(descr ""))
+  (lib (name "RASPBERRY-PI-PICO-W")(type "KiCad")(uri "${KIPRJMOD}/libs")(options "")(descr ""))
+)
