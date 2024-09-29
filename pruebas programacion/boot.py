@@ -15,3 +15,4 @@ time.sleep(5)
 #instale boot.py si desea poder reconfigurar la pi pico w posteriormente
 #si solo instala main.py, la pico posteriormente no se dejará conectar al pc
 #en dado caso, la solución es formatear la memoria de la pi pico w
+#las instrucciones para esto se encuentran en la página oficial de raspberry pi
