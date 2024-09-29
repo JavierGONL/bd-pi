@@ -1,7 +1,7 @@
 
 #imports
 from machine import ADC, Pin, I2C
-from micropython_bmi160 import bmi160
+from micropython_bmi160 import bmi160 #esto se instala con gestionar paquetes en thonny
 import time
 import socket
 #import sys
