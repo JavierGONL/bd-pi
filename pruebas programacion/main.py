@@ -8,8 +8,8 @@ import socket
 #boot.py
 #primero se ejecuta el boot para conectarlo a wifi
 import network
-ssid = 'Bidipi'
-password = 'michi111'
+ssid = 'nombre red wifi'
+password = 'contraseña red wifi'
 
 # pines motores
 
