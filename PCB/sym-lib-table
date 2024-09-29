@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "cd42")(type "KiCad")(uri "${KIPRJMOD}/libs/MH-CD42/cd42.kicad_sym")(options "")(descr ""))
+  (lib (name "RASPBERRY_PI_PICO_W")(type "KiCad")(uri "${KIPRJMOD}/libs/RASPBERRY-PI-PICO-W/RASPBERRY_PI_PICO_W.kicad_sym")(options "")(descr ""))
+)
