@@ -7,24 +7,8 @@ import socket
 #boot.py
 #primero se ejecuta el boot para conectarlo a wifi
 import network
-
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-wlan.connect('Bidipi', 'michi111')
-
-while not wlan.isconnected() and wlan.status() >= 0:
-    print("Conectando...")
-    if wlan.isconnected():
-        break
-print(wlan.ifconfig())
-
-html = """<!DOCTYPE html>
-<html>
-<head> <title> Gatito </title> </head>
-<body>
-</body>
-</html>
-"""
+ssid = 'Bidipi'
+password = 'michi111'
 
 # pines motores
 
@@ -191,9 +175,9 @@ pasos = 0
 def Caminar():
     global revoluciones
     global pasos
-    print("gatito")
-    print(revoluciones)
-    print(pasos)
+    #print("gatito") #monitoreo
+    #print(revoluciones)
+    #print(pasos)
     while True:
         while True:
             paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -447,79 +431,56 @@ def simulacion():
                     pasos = 0
                     break
             
-"""
-def SolicitudWeb(conn):
-    request= conn.recv(1024)  # Recibe la solicitud HTTP
-    request = request.decode('utf-8')
-    print("Solicitud recibida:")
-    print(request)
-
-    if "/caminar" in request:
-        Caminar()
-        response = "HTTP/1.1 200 OK\n\nCaminar."
-    elif "/piernaizquierda" in request:
-       PiernaIzquierda()
-       response = "HTTP/1.1 200 OK\n\nPierna izquierda."
-    elif "/piernaderecha" in request:
-        PiernaDerecha()
-        response = "HTTP/1.1 200 OK\n\nPierna derecha."
-    elif "/cabeza" in request:
-        Cabeza()
-        response = "HTTP/1.1 200 OK\n\nCabeza."
-    else:
-        response = "HTTP/1.1 404 Not Found\n\n404 Not Found."
-
-    conn.send(response)
-    conn.close()
+def conectar():
+    red = network.WLAN(network.STA_IF)
+    red.active(True)
+    red.connect(ssid, password)
+    while red.isconnected() == False:
+        print('Conectando ...')
+        time.sleep(1)
+    ip = red.ifconfig()[0]
+    print(f'Conectado con IP: {ip}')
+    return ip
     
-addr = socket.getaddrinfo('0.0.0.0', 8080)[0][-1]
-s = socket.socket()
-s.bind(addr)
-s.listen(1)
+def open_socket(ip):
+    address = (ip, 80)
+    connection = socket.socket()
+    connection.bind(address)
+    connection.listen(1)
+    return connection
 
-while True:
-    cl, addr = s.accept()  
-    print('Cliente conectado desde', addr)
-    SolicitudWeb(cl)
-    """
-def SolicitudWeb(conn):
-    try:
-        requests = conn.recv(4096)
-        print("Solicitud recibida:")
-        request=requests.decode("utf-8")
-        print(request)
 
-        if b"x2f/x63/x61/x6d/x69/x6e/x61/x72/x0a" in request:
+def serve(connection):
+    while True:
+        cliente = connection.accept()[0]
+        peticion = cliente.recv(1024)
+        peticion = str(peticion)
+        try:
+            peticion = peticion.split()[1]
+        except IndexError:
+            pass
+        if peticion == '/caminar':
             Caminar()
             response = "HTTP/1.1 200 OK\n\nCaminar."
-        elif b"/piernaizquierda" in request:
+        elif peticion =='/piernaizquierda':
             PiernaIzquierda()
             response = "HTTP/1.1 200 OK\n\nPierna izquierda."
-        elif b"/piernaderecha" in request:
+        elif peticion =='/piernaderecha':
             PiernaDerecha()
             response = "HTTP/1.1 200 OK\n\nPierna derecha."
-        elif b"/cabeza" in request:
+        elif peticion =='/cabeza':
             Cabeza()
             response = "HTTP/1.1 200 OK\n\nCabeza."
-        else:
-            response = "HTTP/1.1 404 Not Found\n\n404 Not Found."
+        elif peticion =='/simulacion':
+            simulacion()
+            response = "HTTP/1.1 200 OK\n\nsimulacion."
+        cliente.close()
 
-        conn.send(response.encode())
-    finally:
-        conn.close()
+try:
+    ip = conectar()
+    connection = open_socket(ip)
+    serve(connection)
+except KeyboardInterrupt:
+    machine.reset()
 
-addr = socket.getaddrinfo('192.168.181.149', 8080)[0][-1]
-s = socket.socket()
-s.bind(addr)
-s.listen(1)
-print(addr)
-while True:
-    try:
-        cl, addr = s.accept()
-        print(cl)
-        print('Cliente conectado desde', addr)
-        SolicitudWeb(cl)
-    except Exception as e:
-        print(f"Error: {e}")
-
-
+    
