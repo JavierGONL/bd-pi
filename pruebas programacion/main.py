@@ -179,7 +179,7 @@ def Caminar():
     #print("gatito") #monitoreo
     #print(revoluciones)
     #print(pasos)
-    while True:
+    if True:
         while True:
             paso_motor(secuencia2, pins_1, revoluciones,True)
             paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -255,7 +255,7 @@ def Caminar():
 def PiernaIzquierda():
     global revoluciones
     global pasos
-    while True:
+    if True:
         while True:
             paso_motor(secuencia2, pins_1, revoluciones,True)
             paso_motor(secuencia2, pins_1, revoluciones,True)
@@ -295,7 +295,7 @@ def PiernaDerecha():
     # otra pierna
     global revoluciones
     global pasos
-    while True:
+    if True:
         while True:
             paso_motor(secuencia2, pins_3, revoluciones)
             paso_motor(secuencia2, pins_3, revoluciones)
@@ -346,7 +346,7 @@ def simulacion():
     global revoluciones
     global pasos
     pos_inicio = True
-    while True:
+    if True:
         if pos_inicio:
             # movimiento piernas
             while True:
