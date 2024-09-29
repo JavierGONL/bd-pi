@@ -481,5 +481,5 @@ try:
     ip = conectar()
     connection = open_socket(ip)
     serve(connection)
-except KeyboardInterrupt:
+except:
     machine.reset()
