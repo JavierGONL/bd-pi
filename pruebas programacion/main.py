@@ -1,3 +1,10 @@
+#* disclaimer
+
+#si se guarda este archivo como main, la comunicación entre la pico w y el pc queda interrumpida
+#en algún lugar remoto de internet debe decir como solucionar esto pacíficamente
+# la sugerencia personal es formatear la pico w si se quiere volver a usar
+
+
 
 #imports
 from machine import ADC, Pin, I2C
@@ -483,3 +490,9 @@ try:
     serve(connection)
 except:
     machine.reset()
+    
+# disclaimer 2:
+
+#si se guarda este archivo como main, la comunicación entre la pico w y el pc queda interrumpida
+#en algún lugar remoto de internet debe decir como solucionar esto pacíficamente
+# la sugerencia personal es formatear la pico w si se quiere volver a usar
